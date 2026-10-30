@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
+  body {
+    @apply bg-ivory font-mukta text-brown antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    @apply font-marathi text-maroon;
+    line-height: 1.35;
+  }
+  /* Royal display face for page & section headings */
+  h1, h2 {
+    font-family: 'Rozha One', 'Tiro Devanagari Marathi', serif;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+  ::selection {
+    background: #c49a45;
+    color: #fff8ed;
+  }
+  :focus-visible {
+    outline: 2px solid #c49a45;
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-lux {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .section {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+  .text-gold-grad {
+    background: linear-gradient(135deg, #9c7a32 0%, #e2c27d 40%, #c49a45 65%, #f3dfa8 85%, #9c7a32 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* extend the painted box so Devanagari matras above the line aren't clipped */
+    padding: 0.25em 0.06em 0.1em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-mukta text-base font-semibold tracking-wide transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-gold {
+    @apply btn bg-gold-grad text-maroon-900 shadow-gold hover:-translate-y-0.5 hover:brightness-110;
+    background-size: 200% 200%;
+  }
+  .btn-maroon {
+    @apply btn bg-maroon text-ivory hover:bg-maroon-700 hover:-translate-y-0.5 shadow-lux;
+  }
+  .btn-outline {
+    @apply btn border border-gold/70 text-maroon hover:bg-gold hover:text-ivory;
+  }
+  .btn-outline-light {
+    @apply btn border border-gold-light/70 text-ivory hover:bg-gold-light hover:text-maroon-900;
+  }
+  .btn-whatsapp {
+    @apply btn bg-whatsapp text-white hover:-translate-y-0.5 hover:bg-[#1ebe5b] shadow-[0_12px_30px_-12px_rgba(37,211,102,0.7)];
+  }
+  .eyebrow {
+    @apply font-cormorant text-sm uppercase tracking-[0.35em] text-gold-dark;
+  }
+  .card-lux {
+    @apply rounded-2xl border border-gold/25 bg-white/70 shadow-lux backdrop-blur-sm;
+  }
+  .input-lux {
+    @apply w-full rounded-xl border border-champagne bg-ivory px-4 py-3 font-mukta text-brown placeholder:text-brown/40 transition focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30;
+  }
+  .paisley-bg {
+    background-color: #fff8ed;
+    background-image: radial-gradient(circle at 1px 1px, rgba(196, 154, 69, 0.18) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  .maroon-bg {
+    background: radial-gradient(ellipse at top, #5e1633 0%, #4b1028 45%, #2a0816 100%);
+  }
+}
+
+/* Floating gold particles (hero) */
+.particle {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #f3dfa8 0%, #c49a45 60%, transparent 70%);
+  opacity: 0;
+  animation: rise linear infinite;
+  pointer-events: none;
+}
+@keyframes rise {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-105vh) translateX(30px); opacity: 0; }
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.shimmer {
+  background-size: 200% auto;
+  animation: shimmer 6s linear infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .particle, .shimmer { animation: none !important; }
+}
