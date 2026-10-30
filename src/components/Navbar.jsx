@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -79,6 +80,9 @@ export default function Navbar() {
         </div>
       </nav>
 
+      {/* Portal to <body>: the scrolled header uses backdrop-blur, which would otherwise
+          become the containing block for this fixed drawer and clip it to the header height. */}
+      {createPortal(
       <AnimatePresence>
         {open && (
           <motion.div className="fixed inset-0 z-[60] xl:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -130,7 +134,9 @@ export default function Navbar() {
             </motion.aside>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body,
+      )}
     </header>
   );
 }
